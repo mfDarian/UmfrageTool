@@ -11,6 +11,11 @@ public class Antwort {
 		this.text = text;
 		this.score = score;
 	}
+	
+	public Antwort(String text) {
+		this.text = text;
+		this.score = 0;
+	}
 
 	public final String getText() {
 		return text;
