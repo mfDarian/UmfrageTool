@@ -8,9 +8,9 @@ public class Antwort {
 	private int punkte;
 	private boolean gesetzt;
 	
-	public Antwort(String text, int score) {
+	public Antwort(String text, int punkte) {
 		this.text = text;
-		this.punkte = score;
+		this.punkte = punkte;
 	}
 	
 	public Antwort(String text) {
