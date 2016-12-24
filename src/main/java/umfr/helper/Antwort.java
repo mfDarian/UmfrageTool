@@ -1,5 +1,7 @@
 package umfr.helper;
 
+//Comment
+
 public class Antwort {
 	
 	private String text;
