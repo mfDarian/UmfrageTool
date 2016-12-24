@@ -39,6 +39,28 @@ public class Frage {
 		this.antworten = new ArrayList<Antwort>();
 		this.fakultativ = false;
 	}
+	
+	public int maximalPunkte() {
+		int maximalPunkte = 0;
+		
+		for (Antwort antwort : antworten) {
+			maximalPunkte += antwort.getPunkte();
+		}
+		
+		return maximalPunkte;
+	}
+	
+	public int punktZahl() {
+		int punkte = 0;
+		
+		for (Antwort antwort : antworten) {
+			if (antwort.isGesetzt() == true) {
+				punkte += antwort.getPunkte();
+			}
+		}
+		
+		return punkte;
+	}
 
 	
 	public void addAntwort(Antwort antwort) {
@@ -63,7 +85,7 @@ public class Frage {
 	public void setFakultativ(boolean fakultativ) {
 		this.fakultativ = fakultativ;
 	}
-	public boolean istBeantwortet() {
+	public boolean isBeantwortet() {
 		return beantwortet;
 	}
 	public void setBeantwortet(boolean beantwortet) {

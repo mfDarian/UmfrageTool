@@ -5,16 +5,17 @@ package umfr.helper;
 public class Antwort {
 	
 	private String text;
-	private int score;
+	private int punkte;
+	private boolean gesetzt;
 	
 	public Antwort(String text, int score) {
 		this.text = text;
-		this.score = score;
+		this.punkte = score;
 	}
 	
 	public Antwort(String text) {
 		this.text = text;
-		this.score = 0;
+		this.punkte = 0;
 	}
 
 	public final String getText() {
@@ -25,12 +26,20 @@ public class Antwort {
 		this.text = text;
 	}
 
-	public final int getScore() {
-		return score;
+	public final int getPunkte() {
+		return punkte;
 	}
 
-	public final void setScore(int score) {
-		this.score = score;
+	public final void setPunkte(int punkte) {
+		this.punkte = punkte;
+	}
+	
+	public final boolean isGesetzt() {
+		return gesetzt;
+	}
+	
+	public final void setGesetzt(boolean gesetzt) {
+		this.gesetzt = gesetzt;
 	}
 	
 	
