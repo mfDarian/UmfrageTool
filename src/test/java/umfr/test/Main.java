@@ -17,6 +17,10 @@ public class Main {
 		print(f4.getText());
 		print(f5.getText());
 		
+		print(f5.toString());
+		
+		
+		
 	}
 	
 	private static void print(String text) {

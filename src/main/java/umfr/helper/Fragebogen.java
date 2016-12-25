@@ -39,7 +39,6 @@ public class Fragebogen {
 		return punkte;
 	}
 
-
 	public void addFrage(Frage frage) {
 		fragen.add(frage);
 	}
