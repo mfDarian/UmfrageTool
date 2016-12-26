@@ -24,7 +24,7 @@ public final class FlowControl {
 			template = questionnaire;
 			this.questionnaire = template.getNewClone();
 		} else {
-			throw new MustBeFrozenException(questionnaire);
+			throw new MustBeFrozenException(questionnaire, "Template");
 		}
 	}
 	

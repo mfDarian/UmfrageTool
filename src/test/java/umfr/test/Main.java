@@ -52,6 +52,7 @@ public class Main {
 		try {
 			flowControll.loadQuestionnaire(questionnaire);
 		} catch (MustBeFrozenException e) {
+			System.out.println(e.toString());
 			e.printStackTrace();
 		}
 		

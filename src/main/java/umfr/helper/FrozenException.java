@@ -1,6 +1,6 @@
 package umfr.helper;
 
-public class FrozenException extends Exception {
+public final class FrozenException extends Exception {
 	
 	private Class freezeableClass;
 	
