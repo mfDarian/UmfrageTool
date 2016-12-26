@@ -1,13 +1,26 @@
 package umfr.helper;
 
-public class Antwort {
+//Comment
+
+public class Antwort implements Klonbar {
 	
 	private String text;
-	private int score;
+	private int punkte;
+	private boolean gesetzt;
 	
-	public Antwort(String text, int score) {
+	public Antwort(String text, int punkte) {
 		this.text = text;
-		this.score = score;
+		this.punkte = punkte;
+	}
+	
+	public Antwort(String text) {
+		this.text = text;
+		this.punkte = 0;
+	}
+	
+	public Antwort klonErzeugen() {
+		Antwort klon = new Antwort(this.text, this.punkte);
+		return klon;
 	}
 
 	public final String getText() {
@@ -18,12 +31,20 @@ public class Antwort {
 		this.text = text;
 	}
 
-	public final int getScore() {
-		return score;
+	public final int getPunkte() {
+		return punkte;
 	}
 
-	public final void setScore(int score) {
-		this.score = score;
+	public final void setPunkte(int punkte) {
+		this.punkte = punkte;
+	}
+	
+	public final boolean isGesetzt() {
+		return gesetzt;
+	}
+	
+	public final void setGesetzt(boolean gesetzt) {
+		this.gesetzt = gesetzt;
 	}
 	
 	
