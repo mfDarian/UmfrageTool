@@ -2,87 +2,89 @@ package umfr.helper;
 
 import java.util.ArrayList;
 
-public class Questionnaire implements Cloneable{
+public class Questionnaire implements Scoreable, Cloneable, Freezeable{
 	
 	private String name;
-	private ArrayList<Question> fragen;
+	private ArrayList<Question> questionList;
 	private Person interviewer;
 	private Person interviewee;
+	private boolean frozen;
 	
 	
-	public Questionnaire(String name, ArrayList<Question> fragen) {
+	public Questionnaire(String name, ArrayList<Question> questionList) {
 		this.name = name;
-		this.fragen = fragen;
+		this.questionList = questionList;
 	}
 	
 	public Questionnaire(String name) {
 		this.name = name;
-		this.fragen = new ArrayList<Question>();
+		this.questionList = new ArrayList<Question>();
 	}
 	
 
-	public int maximalPunkte() {
-		int maximalPunkte = 0;
+	public int maximumScore() {
+		int maximumScore = 0;
 		
-		for (Question question : fragen) {
-			maximalPunkte += question.maximalPunkte();
+		for (Question question : questionList) {
+			maximumScore += question.maximumScore();
 		}
 		
-		return maximalPunkte;
+		return maximumScore;
 	}
 	
-	public int punktZahl() {
-		int punkte = 0;
+	public int score() {
+		int score = 0;
 		
-		for (Question question : fragen) {
-			punkte += question.punktZahl();
+		for (Question question : questionList) {
+			score += question.score();
 		}
 		
-		return punkte;
+		return score;
 	}
 
-	public void addFrage(Question question) {
-		fragen.add(question);
+	public void addQuestion(Question question) {
+		questionList.add(question);
 	}
 	
-	public Question getFrage(int index) {
-		if (fragen.size() >= index) {
-			return fragen.get(index);
+	public Question getQuestion(int index) {
+		if (questionList.size() >= index) {
+			return questionList.get(index);
 		}
 		return null;
 	}
 	
-	public void removeFrage(Question question) {
-		if (fragen.contains(question)) {
-			fragen.remove(question);
+	public void removeQuestion(Question question) {
+		if (questionList.contains(question)) {
+			questionList.remove(question);
 		}
 	}
 	
-	public Questionnaire klonErzeugen() {
+	public Questionnaire getNewClone() {
 		Questionnaire klon = new Questionnaire(this.name);
-		for (Question question : this.fragen) {
-			klon.addFrage(question.klonErzeugen());
+		for (Question question : this.questionList) {
+			klon.addQuestion(question.getNewClone());
 		}
 		return klon;
+	}
+	
+	public void freeze() {
+		frozen = true;
 	}
 	
 	public String getName() {
 		return name;
 	}
 
-
 	public void setName(String name) {
 		this.name = name;
 	}
 
-
-	public ArrayList<Question> getFragen() {
-		return fragen;
+	public ArrayList<Question> getQuestionList() {
+		return questionList;
 	}
 
-
-	public void setFragen(ArrayList<Question> fragen) {
-		this.fragen = fragen;
+	public void setQuestionList(ArrayList<Question> questionList) {
+		this.questionList = questionList;
 	}
 
 	public Person getInterviewer() {
@@ -101,7 +103,4 @@ public class Questionnaire implements Cloneable{
 		this.interviewee = interviewee;
 	}
 	
-	
-	
-
 }

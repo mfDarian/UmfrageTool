@@ -2,55 +2,56 @@ package umfr.helper;
 
 import java.util.ArrayList;
 
-public class Question implements Cloneable {
+public class Question implements Scoreable, Cloneable, Freezeable{
 	
-	private static String standardText = "Question";
+	private static String defaultText = "Question";
 	
 	private String text;
-	private ArrayList<Reply> antworten;
-	private boolean fakultativ;
-	private boolean beantwortet;
+	private ArrayList<Reply> replyList;
+	private boolean optional;
+	private boolean answered;
+	private boolean frozen;
 
-	public Question(String text, ArrayList<Reply> antworten, boolean fakultativ) {
+	public Question(String text, ArrayList<Reply> replyList, boolean optional) {
 		this.text = text;
-		this.antworten = antworten;
-		this.fakultativ = fakultativ;
+		this.replyList = replyList;
+		this.optional = optional;
 	}
 	
-	public Question(String text, ArrayList<Reply> antworten) {
+	public Question(String text, ArrayList<Reply> replyList) {
 		this.text = text;
-		this.antworten = antworten;
-		this.fakultativ = false;
+		this.replyList = replyList;
+		this.optional = false;
 	}
 	
 	public Question(String text) {
 		this.text = text;
-		this.antworten = new ArrayList<Reply>();
-		this.fakultativ = false;
+		this.replyList = new ArrayList<Reply>();
+		this.optional = false;
 	}
 	
 	public Question() {
-		this.text = standardText;
-		this.antworten = new ArrayList<Reply>();
-		this.fakultativ = false;
+		this.text = defaultText;
+		this.replyList = new ArrayList<Reply>();
+		this.optional = false;
 	}
 	
-	public int maximalPunkte() {
-		int maximalPunkte = 0;
+	public int maximumScore() {
+		int maximumScore = 0;
 		
-		for (Reply reply : antworten) {
-			maximalPunkte += reply.getPunkte();
+		for (Reply reply : replyList) {
+			maximumScore += reply.score();
 		}
 		
-		return maximalPunkte;
+		return maximumScore;
 	}
 	
-	public int punktZahl() {
+	public int score() {
 		int punkte = 0;
 		
-		for (Reply reply : antworten) {
-			if (reply.isGesetzt() == true) {
-				punkte += reply.getPunkte();
+		for (Reply reply : replyList) {
+			if (reply.isChosen() == true) {
+				punkte += reply.score();
 			}
 		}
 		
@@ -58,29 +59,37 @@ public class Question implements Cloneable {
 	}
 
 	
-	public void addAntwort(Reply reply) {
-		antworten.add(reply);
+	public void addReply(Reply reply) {
+		replyList.add(reply);
 	}
 	
-	public Reply getAntwort(int index) {
-		if (antworten.size() >= index) {
-			return antworten.get(index);
+	public Reply getReply(int index) {
+		if (replyList.size() >= index) {
+			return replyList.get(index);
 		}
 		return null;
 	}
 	
-	public void removeAntwort(Reply reply) {
-		if (antworten.contains(reply)) {
-			antworten.remove(reply);
+	public void removeReply(Reply reply) {
+		if (replyList.contains(reply)) {
+			replyList.remove(reply);
 		}
 	}
 	
-	public Question klonErzeugen() {
-		Question klon = new Question(this.text, new ArrayList<Reply>(), this.fakultativ);
-		for (Reply reply : this.antworten) {
-			klon.addAntwort(reply.klonErzeugen());
+	public Question getNewClone() {
+		Question clone = new Question(this.text, new ArrayList<Reply>(), this.optional);
+		for (Reply reply : this.replyList) {
+			clone.addReply(reply.getNewClone());
 		}
-		return klon;
+		return clone;
+	}
+
+	public void freeze() {
+		frozen = true;
+	}
+	
+	public boolean getFrozen() {
+		return frozen;
 	}
 	
 	public String getText() {
@@ -89,23 +98,23 @@ public class Question implements Cloneable {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public ArrayList<Reply> getAntworten() {
-		return antworten;
+	public ArrayList<Reply> getReplyList() {
+		return replyList;
 	}
-	public void setAntworten(ArrayList<Reply> antworten) {
-		this.antworten = antworten;
+	public void setReplyList(ArrayList<Reply> replyList) {
+		this.replyList = replyList;
 	}
-	public boolean istFakultativ() {
-		return fakultativ;
+	public boolean isOptional() {
+		return optional;
 	}
-	public void setFakultativ(boolean fakultativ) {
-		this.fakultativ = fakultativ;
+	public void setOptional(boolean optional) {
+		this.optional = optional;
 	}
-	public boolean isBeantwortet() {
-		return beantwortet;
+	public boolean isAnswered() {
+		return answered;
 	}
-	public void setBeantwortet(boolean beantwortet) {
-		this.beantwortet = beantwortet;
+	public void setAnswered(boolean answered) {
+		this.answered = answered;
 	}
 
 }

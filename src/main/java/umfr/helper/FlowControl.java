@@ -2,9 +2,9 @@ package umfr.helper;
 
 public final class FlowControl {
 	
-	private static FlowControl steuerung;
+	private static FlowControl flowControll;
 	
-	private Questionnaire vorlage;
+	private Questionnaire template;
 	private Questionnaire questionnaire;
 	
 	// private weil Singleton
@@ -12,22 +12,22 @@ public final class FlowControl {
 		
 	}
 	
-	public static FlowControl getAblaufSteuerung() {
-		if (steuerung == null) {
-			steuerung = new FlowControl();
+	public static FlowControl getFlowControll() {
+		if (flowControll == null) {
+			flowControll = new FlowControl();
 		}
-		return steuerung;
+		return flowControll;
 	}
 	
-	public void ladeFragebogen(Questionnaire questionnaire) {
-		vorlage = questionnaire;
-		this.questionnaire = questionnaire.klonErzeugen();
+	public void loadQuestionnaire(Questionnaire questionnaire) {
+		template = questionnaire;
+		this.questionnaire = questionnaire.getNewClone();
 	}
 	
-	public void alleFragenDrucken() {
-		for (Question question : questionnaire.getFragen()) {
+	public void printAllQuestions() {
+		for (Question question : questionnaire.getQuestionList()) {
 			System.out.println(question.getText());
-			for (Reply reply : question.getAntworten()){
+			for (Reply reply : question.getReplyList()){
 				System.out.println(" _ " + reply.getText());
 			}
 		}

@@ -2,25 +2,25 @@ package umfr.helper;
 
 //Comment
 
-public class Reply implements Cloneable {
+public class Reply implements Scoreable, Cloneable {
 	
 	private String text;
-	private int punkte;
-	private boolean gesetzt;
+	private int score;
+	private boolean chosen;
 	
-	public Reply(String text, int punkte) {
+	public Reply(String text, int score) {
 		this.text = text;
-		this.punkte = punkte;
+		this.score = score;
 	}
 	
 	public Reply(String text) {
 		this.text = text;
-		this.punkte = 0;
+		this.score = 0;
 	}
 	
-	public Reply klonErzeugen() {
-		Reply klon = new Reply(this.text, this.punkte);
-		return klon;
+	public Reply getNewClone() {
+		Reply clone = new Reply(this.text, this.score);
+		return clone;
 	}
 
 	public final String getText() {
@@ -31,20 +31,24 @@ public class Reply implements Cloneable {
 		this.text = text;
 	}
 
-	public final int getPunkte() {
-		return punkte;
+	public final int score() {
+		return score;
+	}
+	
+	public final int maximumScore() {
+		return score;
 	}
 
-	public final void setPunkte(int punkte) {
-		this.punkte = punkte;
+	public final void setScore(int score) {
+		this.score = score;
 	}
 	
-	public final boolean isGesetzt() {
-		return gesetzt;
+	public final boolean isChosen() {
+		return chosen;
 	}
 	
-	public final void setGesetzt(boolean gesetzt) {
-		this.gesetzt = gesetzt;
+	public final void setChosen(boolean chosen) {
+		this.chosen = chosen;
 	}
 	
 	
