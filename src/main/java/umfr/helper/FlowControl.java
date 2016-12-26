@@ -21,7 +21,7 @@ public final class FlowControl {
 	
 	public void loadQuestionnaire(Questionnaire questionnaire) {
 		template = questionnaire;
-		this.questionnaire = questionnaire.getNewClone();
+		this.questionnaire = template.getNewClone();
 	}
 	
 	public void printAllQuestions() {

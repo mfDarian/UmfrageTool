@@ -60,11 +60,11 @@ public class Questionnaire implements Scoreable, Cloneable, Freezeable{
 	}
 	
 	public Questionnaire getNewClone() {
-		Questionnaire klon = new Questionnaire(this.name);
+		Questionnaire clone = new Questionnaire(this.name);
 		for (Question question : this.questionList) {
-			klon.addQuestion(question.getNewClone());
+			clone.addQuestion(question.getNewClone());
 		}
-		return klon;
+		return clone;
 	}
 	
 	public void freeze() {
