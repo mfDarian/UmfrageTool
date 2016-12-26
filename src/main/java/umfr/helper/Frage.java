@@ -69,6 +69,12 @@ public class Frage implements Klonbar {
 		return null;
 	}
 	
+	public void removeAntwort(Antwort antwort) {
+		if (antworten.contains(antwort)) {
+			antworten.remove(antwort);
+		}
+	}
+	
 	public Frage klonErzeugen() {
 		Frage klon = new Frage(this.text, new ArrayList<Antwort>(), this.fakultativ);
 		for (Antwort antwort : this.antworten) {

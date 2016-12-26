@@ -6,6 +6,8 @@ public class Fragebogen implements Klonbar{
 	
 	private String name;
 	private ArrayList<Frage> fragen;
+	private Person interviewer;
+	private Person interviewee;
 	
 	
 	public Fragebogen(String name, ArrayList<Frage> fragen) {
@@ -50,6 +52,12 @@ public class Fragebogen implements Klonbar{
 		return null;
 	}
 	
+	public void removeFrage(Frage frage) {
+		if (fragen.contains(frage)) {
+			fragen.remove(frage);
+		}
+	}
+	
 	public Fragebogen klonErzeugen() {
 		Fragebogen klon = new Fragebogen(this.name);
 		for (Frage frage : this.fragen) {
@@ -75,6 +83,22 @@ public class Fragebogen implements Klonbar{
 
 	public void setFragen(ArrayList<Frage> fragen) {
 		this.fragen = fragen;
+	}
+
+	public Person getInterviewer() {
+		return interviewer;
+	}
+
+	public void setInterviewer(Person interviewer) {
+		this.interviewer = interviewer;
+	}
+
+	public Person getInterviewee() {
+		return interviewee;
+	}
+
+	public void setInterviewee(Person interviewee) {
+		this.interviewee = interviewee;
 	}
 	
 	
