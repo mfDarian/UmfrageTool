@@ -7,7 +7,7 @@ public final class AblaufSteuerung {
 	private Fragebogen vorlage;
 	private Fragebogen fragebogen;
 	
-	// private da Singleton
+	// private weil Singleton
 	private AblaufSteuerung() {
 		
 	}
