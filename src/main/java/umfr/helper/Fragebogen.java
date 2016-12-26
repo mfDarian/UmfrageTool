@@ -43,6 +43,13 @@ public class Fragebogen implements Klonbar{
 		fragen.add(frage);
 	}
 	
+	public Frage getFrage(int index) {
+		if (fragen.size() >= index) {
+			return fragen.get(index);
+		}
+		return null;
+	}
+	
 	public Fragebogen klonErzeugen() {
 		Fragebogen klon = new Fragebogen(this.name);
 		for (Frage frage : this.fragen) {

@@ -23,9 +23,11 @@ public class Main {
 		Antwort f2a1 = new Antwort("5");
 		Antwort f2a2 = new Antwort("2");
 		Antwort f2a3 = new Antwort("1");
+		Antwort f2a4 = new Antwort("17");
 		frage2.addAntwort(f2a1);
 		frage2.addAntwort(f2a2);
-		frage2.addAntwort(f2a3);	
+		frage2.addAntwort(f2a3);
+		frage2.addAntwort(f2a4);
 
 		Frage frage3 = new Frage("Wieviel ist 15/3?");
 		Antwort f3a1 = new Antwort("4");

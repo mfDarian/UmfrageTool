@@ -62,6 +62,13 @@ public class Frage implements Klonbar {
 		antworten.add(antwort);
 	}
 	
+	public Antwort getAntwort(int index) {
+		if (antworten.size() >= index) {
+			return antworten.get(index);
+		}
+		return null;
+	}
+	
 	public Frage klonErzeugen() {
 		Frage klon = new Frage(this.text, new ArrayList<Antwort>(), this.fakultativ);
 		for (Antwort antwort : this.antworten) {
