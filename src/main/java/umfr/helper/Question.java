@@ -88,7 +88,7 @@ public class Question implements Scoreable, Cloneable, Freezeable{
 		frozen = true;
 	}
 	
-	public boolean getFrozen() {
+	public boolean isFrozen() {
 		return frozen;
 	}
 	

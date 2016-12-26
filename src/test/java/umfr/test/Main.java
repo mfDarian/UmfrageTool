@@ -42,12 +42,18 @@ public class Main {
 		questionnaire.addQuestion(frage2);
 		questionnaire.addQuestion(frage3);
 		
+		//Vorlage einfrieren
+		questionnaire.freeze();
 		
 		//Ablaufsteuerung erzeugen
 		FlowControl flowControll = FlowControl.getFlowControll();
 		
 		//Den Questionnaire laden
-		flowControll.loadQuestionnaire(questionnaire);
+		try {
+			flowControll.loadQuestionnaire(questionnaire);
+		} catch (MustBeFrozenException e) {
+			e.printStackTrace();
+		}
 		
 		flowControll.printAllQuestions();
 		

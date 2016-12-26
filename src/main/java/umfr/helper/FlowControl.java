@@ -19,9 +19,13 @@ public final class FlowControl {
 		return flowControll;
 	}
 	
-	public void loadQuestionnaire(Questionnaire questionnaire) {
-		template = questionnaire;
-		this.questionnaire = template.getNewClone();
+	public void loadQuestionnaire(Questionnaire questionnaire) throws MustBeFrozenException {
+		if (questionnaire.isFrozen()) {
+			template = questionnaire;
+			this.questionnaire = template.getNewClone();
+		} else {
+			throw new MustBeFrozenException(questionnaire);
+		}
 	}
 	
 	public void printAllQuestions() {

@@ -71,6 +71,10 @@ public class Questionnaire implements Scoreable, Cloneable, Freezeable{
 		frozen = true;
 	}
 	
+	public boolean isFrozen() {
+		return frozen;
+	}
+	
 	public String getName() {
 		return name;
 	}
