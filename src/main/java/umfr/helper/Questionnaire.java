@@ -2,30 +2,30 @@ package umfr.helper;
 
 import java.util.ArrayList;
 
-public class Fragebogen implements Klonbar{
+public class Questionnaire implements Cloneable{
 	
 	private String name;
-	private ArrayList<Frage> fragen;
+	private ArrayList<Question> fragen;
 	private Person interviewer;
 	private Person interviewee;
 	
 	
-	public Fragebogen(String name, ArrayList<Frage> fragen) {
+	public Questionnaire(String name, ArrayList<Question> fragen) {
 		this.name = name;
 		this.fragen = fragen;
 	}
 	
-	public Fragebogen(String name) {
+	public Questionnaire(String name) {
 		this.name = name;
-		this.fragen = new ArrayList<Frage>();
+		this.fragen = new ArrayList<Question>();
 	}
 	
 
 	public int maximalPunkte() {
 		int maximalPunkte = 0;
 		
-		for (Frage frage : fragen) {
-			maximalPunkte += frage.maximalPunkte();
+		for (Question question : fragen) {
+			maximalPunkte += question.maximalPunkte();
 		}
 		
 		return maximalPunkte;
@@ -34,34 +34,34 @@ public class Fragebogen implements Klonbar{
 	public int punktZahl() {
 		int punkte = 0;
 		
-		for (Frage frage : fragen) {
-			punkte += frage.punktZahl();
+		for (Question question : fragen) {
+			punkte += question.punktZahl();
 		}
 		
 		return punkte;
 	}
 
-	public void addFrage(Frage frage) {
-		fragen.add(frage);
+	public void addFrage(Question question) {
+		fragen.add(question);
 	}
 	
-	public Frage getFrage(int index) {
+	public Question getFrage(int index) {
 		if (fragen.size() >= index) {
 			return fragen.get(index);
 		}
 		return null;
 	}
 	
-	public void removeFrage(Frage frage) {
-		if (fragen.contains(frage)) {
-			fragen.remove(frage);
+	public void removeFrage(Question question) {
+		if (fragen.contains(question)) {
+			fragen.remove(question);
 		}
 	}
 	
-	public Fragebogen klonErzeugen() {
-		Fragebogen klon = new Fragebogen(this.name);
-		for (Frage frage : this.fragen) {
-			klon.addFrage(frage.klonErzeugen());
+	public Questionnaire klonErzeugen() {
+		Questionnaire klon = new Questionnaire(this.name);
+		for (Question question : this.fragen) {
+			klon.addFrage(question.klonErzeugen());
 		}
 		return klon;
 	}
@@ -76,12 +76,12 @@ public class Fragebogen implements Klonbar{
 	}
 
 
-	public ArrayList<Frage> getFragen() {
+	public ArrayList<Question> getFragen() {
 		return fragen;
 	}
 
 
-	public void setFragen(ArrayList<Frage> fragen) {
+	public void setFragen(ArrayList<Question> fragen) {
 		this.fragen = fragen;
 	}
 

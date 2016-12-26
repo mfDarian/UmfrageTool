@@ -2,44 +2,44 @@ package umfr.helper;
 
 import java.util.ArrayList;
 
-public class Frage implements Klonbar {
+public class Question implements Cloneable {
 	
-	private static String standardText = "Frage";
+	private static String standardText = "Question";
 	
 	private String text;
-	private ArrayList<Antwort> antworten;
+	private ArrayList<Reply> antworten;
 	private boolean fakultativ;
 	private boolean beantwortet;
 
-	public Frage(String text, ArrayList<Antwort> antworten, boolean fakultativ) {
+	public Question(String text, ArrayList<Reply> antworten, boolean fakultativ) {
 		this.text = text;
 		this.antworten = antworten;
 		this.fakultativ = fakultativ;
 	}
 	
-	public Frage(String text, ArrayList<Antwort> antworten) {
+	public Question(String text, ArrayList<Reply> antworten) {
 		this.text = text;
 		this.antworten = antworten;
 		this.fakultativ = false;
 	}
 	
-	public Frage(String text) {
+	public Question(String text) {
 		this.text = text;
-		this.antworten = new ArrayList<Antwort>();
+		this.antworten = new ArrayList<Reply>();
 		this.fakultativ = false;
 	}
 	
-	public Frage() {
+	public Question() {
 		this.text = standardText;
-		this.antworten = new ArrayList<Antwort>();
+		this.antworten = new ArrayList<Reply>();
 		this.fakultativ = false;
 	}
 	
 	public int maximalPunkte() {
 		int maximalPunkte = 0;
 		
-		for (Antwort antwort : antworten) {
-			maximalPunkte += antwort.getPunkte();
+		for (Reply reply : antworten) {
+			maximalPunkte += reply.getPunkte();
 		}
 		
 		return maximalPunkte;
@@ -48,9 +48,9 @@ public class Frage implements Klonbar {
 	public int punktZahl() {
 		int punkte = 0;
 		
-		for (Antwort antwort : antworten) {
-			if (antwort.isGesetzt() == true) {
-				punkte += antwort.getPunkte();
+		for (Reply reply : antworten) {
+			if (reply.isGesetzt() == true) {
+				punkte += reply.getPunkte();
 			}
 		}
 		
@@ -58,27 +58,27 @@ public class Frage implements Klonbar {
 	}
 
 	
-	public void addAntwort(Antwort antwort) {
-		antworten.add(antwort);
+	public void addAntwort(Reply reply) {
+		antworten.add(reply);
 	}
 	
-	public Antwort getAntwort(int index) {
+	public Reply getAntwort(int index) {
 		if (antworten.size() >= index) {
 			return antworten.get(index);
 		}
 		return null;
 	}
 	
-	public void removeAntwort(Antwort antwort) {
-		if (antworten.contains(antwort)) {
-			antworten.remove(antwort);
+	public void removeAntwort(Reply reply) {
+		if (antworten.contains(reply)) {
+			antworten.remove(reply);
 		}
 	}
 	
-	public Frage klonErzeugen() {
-		Frage klon = new Frage(this.text, new ArrayList<Antwort>(), this.fakultativ);
-		for (Antwort antwort : this.antworten) {
-			klon.addAntwort(antwort.klonErzeugen());
+	public Question klonErzeugen() {
+		Question klon = new Question(this.text, new ArrayList<Reply>(), this.fakultativ);
+		for (Reply reply : this.antworten) {
+			klon.addAntwort(reply.klonErzeugen());
 		}
 		return klon;
 	}
@@ -89,10 +89,10 @@ public class Frage implements Klonbar {
 	public void setText(String text) {
 		this.text = text;
 	}
-	public ArrayList<Antwort> getAntworten() {
+	public ArrayList<Reply> getAntworten() {
 		return antworten;
 	}
-	public void setAntworten(ArrayList<Antwort> antworten) {
+	public void setAntworten(ArrayList<Reply> antworten) {
 		this.antworten = antworten;
 	}
 	public boolean istFakultativ() {

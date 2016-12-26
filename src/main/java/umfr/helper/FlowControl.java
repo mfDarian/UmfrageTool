@@ -1,34 +1,34 @@
 package umfr.helper;
 
-public final class AblaufSteuerung {
+public final class FlowControl {
 	
-	private static AblaufSteuerung steuerung;
+	private static FlowControl steuerung;
 	
-	private Fragebogen vorlage;
-	private Fragebogen fragebogen;
+	private Questionnaire vorlage;
+	private Questionnaire questionnaire;
 	
 	// private weil Singleton
-	private AblaufSteuerung() {
+	private FlowControl() {
 		
 	}
 	
-	public static AblaufSteuerung getAblaufSteuerung() {
+	public static FlowControl getAblaufSteuerung() {
 		if (steuerung == null) {
-			steuerung = new AblaufSteuerung();
+			steuerung = new FlowControl();
 		}
 		return steuerung;
 	}
 	
-	public void ladeFragebogen(Fragebogen fragebogen) {
-		vorlage = fragebogen;
-		this.fragebogen = fragebogen.klonErzeugen();
+	public void ladeFragebogen(Questionnaire questionnaire) {
+		vorlage = questionnaire;
+		this.questionnaire = questionnaire.klonErzeugen();
 	}
 	
 	public void alleFragenDrucken() {
-		for (Frage frage : fragebogen.getFragen()) {
-			System.out.println(frage.getText());
-			for (Antwort antwort : frage.getAntworten()){
-				System.out.println(" _ " + antwort.getText());
+		for (Question question : questionnaire.getFragen()) {
+			System.out.println(question.getText());
+			for (Reply reply : question.getAntworten()){
+				System.out.println(" _ " + reply.getText());
 			}
 		}
 	}

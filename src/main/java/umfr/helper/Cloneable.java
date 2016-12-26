@@ -1,7 +1,7 @@
 package umfr.helper;
 
-public interface Klonbar {
+public interface Cloneable {
 	
-	public Klonbar klonErzeugen();
+	public Cloneable klonErzeugen();
 
 }

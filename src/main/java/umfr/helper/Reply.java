@@ -2,24 +2,24 @@ package umfr.helper;
 
 //Comment
 
-public class Antwort implements Klonbar {
+public class Reply implements Cloneable {
 	
 	private String text;
 	private int punkte;
 	private boolean gesetzt;
 	
-	public Antwort(String text, int punkte) {
+	public Reply(String text, int punkte) {
 		this.text = text;
 		this.punkte = punkte;
 	}
 	
-	public Antwort(String text) {
+	public Reply(String text) {
 		this.text = text;
 		this.punkte = 0;
 	}
 	
-	public Antwort klonErzeugen() {
-		Antwort klon = new Antwort(this.text, this.punkte);
+	public Reply klonErzeugen() {
+		Reply klon = new Reply(this.text, this.punkte);
 		return klon;
 	}
 

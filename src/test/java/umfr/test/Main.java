@@ -7,47 +7,47 @@ public class Main {
 		
 		print("Start Test");
 		
-		//Einen Fragebogen erstellen
-		Fragebogen fragebogen = new Fragebogen("Test Fragebogen");
+		//Einen Questionnaire erstellen
+		Questionnaire questionnaire = new Questionnaire("Test Questionnaire");
 		
 		//Drei Fragen mit Antworten erstellen
-		Frage frage1 = new Frage("Wieviel ist 1+1?");
-		Antwort f1a1 = new Antwort("7");
-		Antwort f1a2 = new Antwort("2");
-		Antwort f1a3 = new Antwort("1");
+		Question frage1 = new Question("Wieviel ist 1+1?");
+		Reply f1a1 = new Reply("7");
+		Reply f1a2 = new Reply("2");
+		Reply f1a3 = new Reply("1");
 		frage1.addAntwort(f1a1);
 		frage1.addAntwort(f1a2);
 		frage1.addAntwort(f1a3);
 		
-		Frage frage2 = new Frage("Wieviel ist 8-3?");
-		Antwort f2a1 = new Antwort("5");
-		Antwort f2a2 = new Antwort("2");
-		Antwort f2a3 = new Antwort("1");
-		Antwort f2a4 = new Antwort("17");
+		Question frage2 = new Question("Wieviel ist 8-3?");
+		Reply f2a1 = new Reply("5");
+		Reply f2a2 = new Reply("2");
+		Reply f2a3 = new Reply("1");
+		Reply f2a4 = new Reply("17");
 		frage2.addAntwort(f2a1);
 		frage2.addAntwort(f2a2);
 		frage2.addAntwort(f2a3);
 		frage2.addAntwort(f2a4);
 
-		Frage frage3 = new Frage("Wieviel ist 15/3?");
-		Antwort f3a1 = new Antwort("4");
-		Antwort f3a2 = new Antwort("3");
-		Antwort f3a3 = new Antwort("5");
+		Question frage3 = new Question("Wieviel ist 15/3?");
+		Reply f3a1 = new Reply("4");
+		Reply f3a2 = new Reply("3");
+		Reply f3a3 = new Reply("5");
 		frage3.addAntwort(f3a1);
 		frage3.addAntwort(f3a2);
 		frage3.addAntwort(f3a3);
 		
 		//Die Fragen dem Bogen hinzufügen
-		fragebogen.addFrage(frage1);
-		fragebogen.addFrage(frage2);
-		fragebogen.addFrage(frage3);
+		questionnaire.addFrage(frage1);
+		questionnaire.addFrage(frage2);
+		questionnaire.addFrage(frage3);
 		
 		
 		//Ablaufsteuerung erzeugen
-		AblaufSteuerung steuerung = AblaufSteuerung.getAblaufSteuerung();
+		FlowControl steuerung = FlowControl.getAblaufSteuerung();
 		
-		//Den Fragebogen laden
-		steuerung.ladeFragebogen(fragebogen);
+		//Den Questionnaire laden
+		steuerung.ladeFragebogen(questionnaire);
 		
 		steuerung.alleFragenDrucken();
 		
