@@ -2,7 +2,7 @@ package umfr.helper;
 
 import java.util.ArrayList;
 
-public class Fragebogen {
+public class Fragebogen implements Klonbar{
 	
 	private String name;
 	private ArrayList<Frage> fragen;
@@ -41,6 +41,14 @@ public class Fragebogen {
 
 	public void addFrage(Frage frage) {
 		fragen.add(frage);
+	}
+	
+	public Fragebogen klonErzeugen() {
+		Fragebogen klon = new Fragebogen(this.name);
+		for (Frage frage : this.fragen) {
+			klon.addFrage(frage.klonErzeugen());
+		}
+		return klon;
 	}
 	
 	public String getName() {

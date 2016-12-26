@@ -2,7 +2,7 @@ package umfr.helper;
 
 //Comment
 
-public class Antwort {
+public class Antwort implements Klonbar {
 	
 	private String text;
 	private int punkte;
@@ -16,6 +16,11 @@ public class Antwort {
 	public Antwort(String text) {
 		this.text = text;
 		this.punkte = 0;
+	}
+	
+	public Antwort klonErzeugen() {
+		Antwort klon = new Antwort(this.text, this.punkte);
+		return klon;
 	}
 
 	public final String getText() {

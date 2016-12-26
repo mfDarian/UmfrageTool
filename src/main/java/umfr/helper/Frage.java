@@ -2,10 +2,9 @@ package umfr.helper;
 
 import java.util.ArrayList;
 
-public class Frage {
+public class Frage implements Klonbar {
 	
-	private static String standardText = "Frage ";
-	private static int frageNummer = 0;
+	private static String standardText = "Frage";
 	
 	private String text;
 	private ArrayList<Antwort> antworten;
@@ -13,29 +12,25 @@ public class Frage {
 	private boolean beantwortet;
 
 	public Frage(String text, ArrayList<Antwort> antworten, boolean fakultativ) {
-		frageNummer++;
 		this.text = text;
 		this.antworten = antworten;
 		this.fakultativ = fakultativ;
 	}
 	
 	public Frage(String text, ArrayList<Antwort> antworten) {
-		frageNummer++;
 		this.text = text;
 		this.antworten = antworten;
 		this.fakultativ = false;
 	}
 	
 	public Frage(String text) {
-		frageNummer++;
 		this.text = text;
 		this.antworten = new ArrayList<Antwort>();
 		this.fakultativ = false;
 	}
 	
 	public Frage() {
-		frageNummer++;
-		this.text = standardText + frageNummer;
+		this.text = standardText;
 		this.antworten = new ArrayList<Antwort>();
 		this.fakultativ = false;
 	}
@@ -67,6 +62,14 @@ public class Frage {
 		antworten.add(antwort);
 	}
 	
+	public Frage klonErzeugen() {
+		Frage klon = new Frage(this.text, new ArrayList<Antwort>(), this.fakultativ);
+		for (Antwort antwort : this.antworten) {
+			klon.addAntwort(antwort.klonErzeugen());
+		}
+		return klon;
+	}
+	
 	public String getText() {
 		return text;
 	}
@@ -79,7 +82,7 @@ public class Frage {
 	public void setAntworten(ArrayList<Antwort> antworten) {
 		this.antworten = antworten;
 	}
-	public boolean istObligatorisch() {
+	public boolean istFakultativ() {
 		return fakultativ;
 	}
 	public void setFakultativ(boolean fakultativ) {
