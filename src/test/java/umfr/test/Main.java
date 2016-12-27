@@ -57,6 +57,9 @@ public class Main {
 			e.printStackTrace();
 		}
 		
+		//Questionnaire speichern
+		flowControll.saveQuestionnaire("quest.ser");
+		
 		flowControll.printAllQuestions();
 		
 		print("Ende Test");

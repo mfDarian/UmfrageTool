@@ -1,8 +1,9 @@
 package umfr.helper;
 
 import java.util.ArrayList;
+import java.io.*;
 
-public class Questionnaire implements Scoreable, Cloneable, Freezeable{
+public class Questionnaire implements Serializable, Scoreable, Cloneable, Freezeable{
 	
 	private String name;
 	private ArrayList<Question> questionList;

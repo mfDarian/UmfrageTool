@@ -1,10 +1,11 @@
 package umfr.helper;
 
 import umfr.exceptions.MaxReplyCountException;
+import java.io.*;
 
 //Comment
 
-public class Reply implements Scoreable, Cloneable {
+public class Reply implements Serializable, Scoreable, Cloneable {
 	
 	private Question question;
 	private String text;
