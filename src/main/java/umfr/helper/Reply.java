@@ -24,6 +24,14 @@ public class Reply implements Scoreable, Cloneable {
 		return clone;
 	}
 
+	public Question getQuestion() {
+		return question;
+	}
+	
+	public void setQuestion(Question question) {
+		this.question = question;
+	}
+	
 	public final String getText() {
 		return text;
 	}

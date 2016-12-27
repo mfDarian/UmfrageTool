@@ -8,32 +8,46 @@ public class Question implements Scoreable, Cloneable, Freezeable{
 	
 	private String text;
 	private ArrayList<Reply> replyList;
-	private boolean optional;
+	private int minRepliesChosen;
+	private int maxRepliesChosen;
+	private int repliesChosen;
 	private boolean answered;
 	private boolean frozen;
 
-	public Question(String text, ArrayList<Reply> replyList, boolean optional) {
+	public Question(String text, ArrayList<Reply> replyList, int minRepliesChosen, int maxRepliesChosen) {
 		this.text = text;
 		this.replyList = replyList;
-		this.optional = optional;
+		registerReplyList(replyList);
+		this.minRepliesChosen = minRepliesChosen;
+		this.maxRepliesChosen = maxRepliesChosen;
 	}
 	
 	public Question(String text, ArrayList<Reply> replyList) {
 		this.text = text;
 		this.replyList = replyList;
-		this.optional = false;
+		registerReplyList(replyList);
+		this.minRepliesChosen = 1;
+		this.maxRepliesChosen = 1;
 	}
 	
 	public Question(String text) {
 		this.text = text;
 		this.replyList = new ArrayList<Reply>();
-		this.optional = false;
+		this.minRepliesChosen = 1;
+		this.maxRepliesChosen = 1;
 	}
 	
 	public Question() {
 		this.text = defaultText;
 		this.replyList = new ArrayList<Reply>();
-		this.optional = false;
+		this.minRepliesChosen = 1;
+		this.maxRepliesChosen = 1;
+	}
+	
+	private void registerReplyList(ArrayList<Reply> replyList) {
+		for (Reply reply : replyList) {
+			reply.setQuestion(this);
+		}
 	}
 	
 	public int maximumScore() {
@@ -61,6 +75,7 @@ public class Question implements Scoreable, Cloneable, Freezeable{
 	
 	public void addReply(Reply reply) {
 		replyList.add(reply);
+		reply.setQuestion(this);
 	}
 	
 	public Reply getReply(int index) {
@@ -73,13 +88,20 @@ public class Question implements Scoreable, Cloneable, Freezeable{
 	public void removeReply(Reply reply) {
 		if (replyList.contains(reply)) {
 			replyList.remove(reply);
+			reply.setQuestion(null);
 		}
 	}
 	
+	public void notifyChosen(Reply reply) {
+		// TODO Antworten loopen um zu sehen, wieviele gesetzt sind. Falls Verstoss gegen min oder max, dann die eingehende Reply wieder unsetten und eine entsprechende Exception werfen
+	}
+	
 	public Question getNewClone() {
-		Question clone = new Question(this.text, new ArrayList<Reply>(), this.optional);
-		for (Reply reply : this.replyList) {
-			clone.addReply(reply.getNewClone());
+		Question clone = new Question(this.text, new ArrayList<Reply>(),this.minRepliesChosen, this.maxRepliesChosen);
+		for (Reply r : this.replyList) {
+			Reply reply = r.getNewClone();
+			clone.addReply(reply);
+			reply.setQuestion(clone);
 		}
 		return clone;
 	}
@@ -90,6 +112,10 @@ public class Question implements Scoreable, Cloneable, Freezeable{
 	
 	public boolean isFrozen() {
 		return frozen;
+	}
+	
+	public boolean isOptional() {
+		return minRepliesChosen == 0;
 	}
 	
 	public String getText() {
@@ -104,11 +130,17 @@ public class Question implements Scoreable, Cloneable, Freezeable{
 	public void setReplyList(ArrayList<Reply> replyList) {
 		this.replyList = replyList;
 	}
-	public boolean isOptional() {
-		return optional;
+	public int getMinRepliesChosen() {
+		return minRepliesChosen;
 	}
-	public void setOptional(boolean optional) {
-		this.optional = optional;
+	public void setMinRepliesChosen(int minRepliesChosen) {
+		this.minRepliesChosen = minRepliesChosen;
+	}
+	public int getMaxRepliesChosen() {
+		return maxRepliesChosen;
+	}
+	public void setMaxRepliesChosen(int maxRepliesChosen) {
+		this.maxRepliesChosen = maxRepliesChosen;
 	}
 	public boolean isAnswered() {
 		return answered;
