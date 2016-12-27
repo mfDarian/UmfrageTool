@@ -102,7 +102,7 @@ public class Question implements Scoreable, Cloneable, Freezeable{
 			}
 		}
 		return chosenCount;
-	} //
+	}
 	
 	public void notifyChosen(Reply reply) throws ReplyCountException {
 		int chosenCount = chosenCount();
