@@ -2,6 +2,8 @@ package umfr.helper;
 
 import java.util.ArrayList;
 
+import umfr.exceptions.ReplyCountException;
+
 public class Question implements Scoreable, Cloneable, Freezeable{
 	
 	private static String defaultText = "Question";
@@ -92,8 +94,22 @@ public class Question implements Scoreable, Cloneable, Freezeable{
 		}
 	}
 	
-	public void notifyChosen(Reply reply) {
-		// TODO Antworten loopen um zu sehen, wieviele gesetzt sind. Falls Verstoss gegen min oder max, dann die eingehende Reply wieder unsetten und eine entsprechende Exception werfen
+	public int chosenCount() {
+		int chosenCount = 0;
+		for (Reply r : replyList) {
+			if (r.isChosen() == true) {
+				chosenCount++;
+			}
+		}
+		return chosenCount;
+	}
+	
+	public void notifyChosen(Reply reply) throws ReplyCountException {
+		int chosenCount = chosenCount();
+		if (chosenCount > maxRepliesChosen) {
+			reply.setChosen(false);
+			throw new ReplyCountException(maxRepliesChosen);
+		}
 	}
 	
 	public Question getNewClone() {
