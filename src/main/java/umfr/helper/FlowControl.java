@@ -1,5 +1,7 @@
 package umfr.helper;
 
+import umfr.exceptions.MustBeFrozenException;
+
 public final class FlowControl {
 	
 	private static FlowControl flowControll;

@@ -1,5 +1,6 @@
 package umfr.test;
 
+import umfr.exceptions.MustBeFrozenException;
 import umfr.helper.*;
 
 public class Main {

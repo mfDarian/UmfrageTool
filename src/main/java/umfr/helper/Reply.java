@@ -4,6 +4,7 @@ package umfr.helper;
 
 public class Reply implements Scoreable, Cloneable {
 	
+	private Question question;
 	private String text;
 	private int score;
 	private boolean chosen;

@@ -1,4 +1,6 @@
-package umfr.helper;
+package umfr.exceptions;
+
+import umfr.helper.Freezeable;
 
 public final class MustBeFrozenException extends Exception {
 	
