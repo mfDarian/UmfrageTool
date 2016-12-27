@@ -2,7 +2,8 @@ package umfr.helper;
 
 import java.util.ArrayList;
 
-import umfr.exceptions.ReplyCountException;
+import umfr.exceptions.MaxReplyCountException;
+import umfr.exceptions.MinReplyCountException;
 
 public class Question implements Scoreable, Cloneable, Freezeable{
 	
@@ -22,6 +23,7 @@ public class Question implements Scoreable, Cloneable, Freezeable{
 		registerReplyList(replyList);
 		this.minRepliesChosen = minRepliesChosen;
 		this.maxRepliesChosen = maxRepliesChosen;
+		this.repliesChosen = 0;
 	}
 	
 	public Question(String text, ArrayList<Reply> replyList) {
@@ -30,6 +32,7 @@ public class Question implements Scoreable, Cloneable, Freezeable{
 		registerReplyList(replyList);
 		this.minRepliesChosen = 1;
 		this.maxRepliesChosen = 1;
+		this.repliesChosen = 0;
 	}
 	
 	public Question(String text) {
@@ -37,6 +40,7 @@ public class Question implements Scoreable, Cloneable, Freezeable{
 		this.replyList = new ArrayList<Reply>();
 		this.minRepliesChosen = 1;
 		this.maxRepliesChosen = 1;
+		this.repliesChosen = 0;
 	}
 	
 	public Question() {
@@ -44,6 +48,7 @@ public class Question implements Scoreable, Cloneable, Freezeable{
 		this.replyList = new ArrayList<Reply>();
 		this.minRepliesChosen = 1;
 		this.maxRepliesChosen = 1;
+		this.repliesChosen = 0;
 	}
 	
 	private void registerReplyList(ArrayList<Reply> replyList) {
@@ -54,23 +59,19 @@ public class Question implements Scoreable, Cloneable, Freezeable{
 	
 	public int maximumScore() {
 		int maximumScore = 0;
-		
 		for (Reply reply : replyList) {
 			maximumScore += reply.score();
 		}
-		
 		return maximumScore;
 	}
 	
 	public int score() {
 		int punkte = 0;
-		
 		for (Reply reply : replyList) {
 			if (reply.isChosen() == true) {
 				punkte += reply.score();
 			}
 		}
-		
 		return punkte;
 	}
 
@@ -94,21 +95,12 @@ public class Question implements Scoreable, Cloneable, Freezeable{
 		}
 	}
 	
-	public int chosenCount() {
-		int chosenCount = 0;
-		for (Reply r : replyList) {
-			if (r.isChosen() == true) {
-				chosenCount++;
-			}
-		}
-		return chosenCount;
-	}
-	
-	public void notifyChosen(Reply reply) throws ReplyCountException {
-		int chosenCount = chosenCount();
-		if (chosenCount > maxRepliesChosen) {
+	public void notifyChosen(Reply reply) throws MaxReplyCountException {
+		if (repliesChosen > maxRepliesChosen) {
 			reply.setChosen(false);
-			throw new ReplyCountException(maxRepliesChosen);
+			throw new MaxReplyCountException(minRepliesChosen, maxRepliesChosen);
+		} else {
+			repliesChosen++;
 		}
 	}
 	
@@ -137,32 +129,49 @@ public class Question implements Scoreable, Cloneable, Freezeable{
 	public String getText() {
 		return text;
 	}
+	
 	public void setText(String text) {
 		this.text = text;
 	}
+	
 	public ArrayList<Reply> getReplyList() {
 		return replyList;
 	}
+	
 	public void setReplyList(ArrayList<Reply> replyList) {
 		this.replyList = replyList;
 	}
+	
 	public int getMinRepliesChosen() {
 		return minRepliesChosen;
 	}
+	
 	public void setMinRepliesChosen(int minRepliesChosen) {
 		this.minRepliesChosen = minRepliesChosen;
 	}
+	
 	public int getMaxRepliesChosen() {
 		return maxRepliesChosen;
 	}
+	
 	public void setMaxRepliesChosen(int maxRepliesChosen) {
 		this.maxRepliesChosen = maxRepliesChosen;
 	}
+	
+	public int getRepliesChosen() {
+		return repliesChosen;
+	}
+	
 	public boolean isAnswered() {
 		return answered;
 	}
-	public void setAnswered(boolean answered) {
-		this.answered = answered;
+	
+	public void setAnswered(boolean answered) throws MinReplyCountException {
+		if (repliesChosen < minRepliesChosen) {
+			throw new MinReplyCountException(minRepliesChosen, maxRepliesChosen);
+		} else {
+			this.answered = answered;
+		}
 	}
 
 }

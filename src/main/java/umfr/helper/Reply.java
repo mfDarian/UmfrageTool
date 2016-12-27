@@ -1,6 +1,6 @@
 package umfr.helper;
 
-import umfr.exceptions.ReplyCountException;
+import umfr.exceptions.MaxReplyCountException;
 
 //Comment
 
@@ -58,7 +58,7 @@ public class Reply implements Scoreable, Cloneable {
 		return chosen;
 	}
 	
-	public final void setChosen(boolean chosen) throws ReplyCountException {
+	public final void setChosen(boolean chosen) throws MaxReplyCountException {
 		this.chosen = chosen;
 		question.notifyChosen(this);
 	}

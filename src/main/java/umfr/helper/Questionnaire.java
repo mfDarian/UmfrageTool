@@ -24,21 +24,17 @@ public class Questionnaire implements Scoreable, Cloneable, Freezeable{
 
 	public int maximumScore() {
 		int maximumScore = 0;
-		
 		for (Question question : questionList) {
 			maximumScore += question.maximumScore();
 		}
-		
 		return maximumScore;
 	}
 	
 	public int score() {
 		int score = 0;
-		
 		for (Question question : questionList) {
 			score += question.score();
 		}
-		
 		return score;
 	}
 
