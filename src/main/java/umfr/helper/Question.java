@@ -1,11 +1,12 @@
 package umfr.helper;
 
 import java.util.ArrayList;
+import java.io.*;
 
 import umfr.exceptions.MaxReplyCountException;
 import umfr.exceptions.MinReplyCountException;
 
-public class Question implements Scoreable, Cloneable, Freezeable{
+public class Question implements Serializable, Scoreable, Cloneable, Freezeable{
 	
 	private static String defaultText = "Question";
 	

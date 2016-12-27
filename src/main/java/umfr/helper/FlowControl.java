@@ -1,6 +1,7 @@
 package umfr.helper;
 
 import umfr.exceptions.MustBeFrozenException;
+import java.io.*;
 
 public final class FlowControl {
 	
@@ -27,6 +28,26 @@ public final class FlowControl {
 			this.questionnaire = template.getNewClone();
 		} else {
 			throw new MustBeFrozenException(questionnaire, "Template");
+		}
+	}
+	
+	public void saveQuestionnaire(String path) {
+		try {
+			ObjectOutputStream os = new ObjectOutputStream(new FileOutputStream(path));
+			os.writeObject(questionnaire);
+			os.close();
+		} catch (IOException ex) {
+			ex.printStackTrace(); //TODO
+		}
+	}
+	
+	public void openQuestionnaire(String path) {
+		try {
+			ObjectInputStream is = new ObjectInputStream(new FileInputStream(path));
+			Questionnaire template = (Questionnaire) is.readObject();
+			is.close();
+		} catch (Exception ex) {
+			ex.printStackTrace(); //TODO
 		}
 	}
 	
